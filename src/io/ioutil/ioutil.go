@@ -11,40 +11,10 @@
 package ioutil
 
 import (
-	"io"
 	"io/fs"
 	"os"
 	"sort"
 )
-
-// ReadAll reads from r until an error or EOF and returns the data it read.
-// A successful call returns err == nil, not err == EOF. Because ReadAll is
-// defined to read from src until EOF, it does not treat an EOF from Read
-// as an error to be reported.
-//
-// Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
-func ReadAll(r io.Reader) ([]byte, error) {
-	return io.ReadAll(r)
-}
-
-// ReadFile reads the file named by filename and returns the contents.
-// A successful call returns err == nil, not err == EOF. Because ReadFile
-// reads the whole file, it does not treat an EOF from Read as an error
-// to be reported.
-//
-// Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
-func ReadFile(filename string) ([]byte, error) {
-	return os.ReadFile(filename)
-}
-
-// WriteFile writes data to a file named by filename.
-// If the file does not exist, WriteFile creates it with permissions perm
-// (before umask); otherwise WriteFile truncates it before writing, without changing permissions.
-//
-// Deprecated: As of Go 1.16, this function simply calls os.WriteFile.
-func WriteFile(filename string, data []byte, perm fs.FileMode) error {
-	return os.WriteFile(filename, data, perm)
-}
 
 // ReadDir reads the directory named by dirname and returns
 // a list of fs.FileInfo for the directory's contents,
@@ -79,17 +49,3 @@ func ReadDir(dirname string) ([]fs.FileInfo, error) {
 	sort.Slice(list, func(i, j int) bool { return list[i].Name() < list[j].Name() })
 	return list, nil
 }
-
-// NopCloser returns a ReadCloser with a no-op Close method wrapping
-// the provided Reader r.
-//
-// Deprecated: As of Go 1.16, this function simply calls io.NopCloser.
-func NopCloser(r io.Reader) io.ReadCloser {
-	return io.NopCloser(r)
-}
-
-// Discard is an io.Writer on which all Write calls succeed
-// without doing anything.
-//
-// Deprecated: As of Go 1.16, this value is simply io.Discard.
-var Discard io.Writer = io.Discard

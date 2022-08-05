@@ -188,7 +188,7 @@ func TestPfxAlign(t *testing.T) {
 
 	for _, pgm := range pgms {
 		tmpfile := filepath.Join(dir, "x.s")
-		err = ioutil.WriteFile(tmpfile, pgm.text, 0644)
+		err = os.WriteFile(tmpfile, pgm.text, 0644)
 		if err != nil {
 			t.Fatalf("can't write output: %v\n", err)
 		}
@@ -281,7 +281,7 @@ func TestLarge(t *testing.T) {
 		gen(buf, test.jmpinsn)
 
 		tmpfile := filepath.Join(dir, "x.s")
-		err = ioutil.WriteFile(tmpfile, buf.Bytes(), 0644)
+		err = os.WriteFile(tmpfile, buf.Bytes(), 0644)
 		if err != nil {
 			t.Fatalf("can't write output: %v\n", err)
 		}
@@ -345,7 +345,7 @@ func TestPCalign(t *testing.T) {
 	// generate a test with valid uses of PCALIGN
 
 	tmpfile := filepath.Join(dir, "x.s")
-	err = ioutil.WriteFile(tmpfile, []byte(validPCAlignSrc), 0644)
+	err = os.WriteFile(tmpfile, []byte(validPCAlignSrc), 0644)
 	if err != nil {
 		t.Fatalf("can't write output: %v\n", err)
 	}
@@ -385,7 +385,7 @@ func TestPCalign(t *testing.T) {
 	// generate a test with invalid use of PCALIGN
 
 	tmpfile = filepath.Join(dir, "xi.s")
-	err = ioutil.WriteFile(tmpfile, []byte(invalidPCAlignSrc), 0644)
+	err = os.WriteFile(tmpfile, []byte(invalidPCAlignSrc), 0644)
 	if err != nil {
 		t.Fatalf("can't write output: %v\n", err)
 	}

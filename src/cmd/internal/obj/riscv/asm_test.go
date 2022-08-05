@@ -35,7 +35,7 @@ func TestLargeBranch(t *testing.T) {
 	genLargeBranch(buf)
 
 	tmpfile := filepath.Join(dir, "x.s")
-	if err := ioutil.WriteFile(tmpfile, buf.Bytes(), 0644); err != nil {
+	if err := os.WriteFile(tmpfile, buf.Bytes(), 0644); err != nil {
 		t.Fatalf("Failed to write file: %v", err)
 	}
 
@@ -73,7 +73,7 @@ func TestLargeCall(t *testing.T) {
 	}
 	defer os.RemoveAll(dir)
 
-	if err := ioutil.WriteFile(filepath.Join(dir, "go.mod"), []byte("module largecall"), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("module largecall"), 0644); err != nil {
 		t.Fatalf("Failed to write file: %v\n", err)
 	}
 	main := `package main
@@ -84,7 +84,7 @@ func main() {
 func x()
 func y()
 `
-	if err := ioutil.WriteFile(filepath.Join(dir, "x.go"), []byte(main), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "x.go"), []byte(main), 0644); err != nil {
 		t.Fatalf("failed to write main: %v\n", err)
 	}
 
@@ -92,7 +92,7 @@ func y()
 	buf := bytes.NewBuffer(make([]byte, 0, 7000000))
 	genLargeCall(buf)
 
-	if err := ioutil.WriteFile(filepath.Join(dir, "x.s"), buf.Bytes(), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "x.s"), buf.Bytes(), 0644); err != nil {
 		t.Fatalf("Failed to write file: %v\n", err)
 	}
 
@@ -136,7 +136,7 @@ func TestNoRet(t *testing.T) {
 	}
 	defer os.RemoveAll(dir)
 	tmpfile := filepath.Join(dir, "x.s")
-	if err := ioutil.WriteFile(tmpfile, []byte("TEXT ·stub(SB),$0-0\nNOP\n"), 0644); err != nil {
+	if err := os.WriteFile(tmpfile, []byte("TEXT ·stub(SB),$0-0\nNOP\n"), 0644); err != nil {
 		t.Fatal(err)
 	}
 	cmd := exec.Command(testenv.GoToolPath(t), "tool", "asm", "-o", filepath.Join(dir, "x.o"), tmpfile)
@@ -190,7 +190,7 @@ TEXT _stub(SB),$0-0
 	MOVF	F6, 4096(X5)
 	MOVD	F6, 4096(X5)
 `
-	if err := ioutil.WriteFile(tmpfile, []byte(asm), 0644); err != nil {
+	if err := os.WriteFile(tmpfile, []byte(asm), 0644); err != nil {
 		t.Fatal(err)
 	}
 	cmd := exec.Command(testenv.GoToolPath(t), "tool", "asm", "-o", filepath.Join(dir, "x.o"), tmpfile)

@@ -1,4 +1,6 @@
+//go:build !nacl && !js && !gccgo
 // +build !nacl,!js,!gccgo
+
 // run
 
 // Copyright 2017 The Go Authors. All rights reserved.
@@ -70,7 +72,7 @@ func main() {
 		b := bytes.Buffer{}
 		fmt.Fprintf(&b, fn, tc.Type, tc.Input)
 
-		err = ioutil.WriteFile(tmpFile, b.Bytes(), 0644)
+		err = os.WriteFile(tmpFile, b.Bytes(), 0644)
 		if err != nil {
 			log.Fatal(err)
 		}

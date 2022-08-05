@@ -45,7 +45,7 @@ func TestReproducibleBuilds(t *testing.T) {
 				if err != nil {
 					t.Fatalf("failed to compile: %v\n%s", err, out)
 				}
-				obj, err := ioutil.ReadFile(tmp.Name())
+				obj, err := os.ReadFile(tmp.Name())
 				if err != nil {
 					t.Fatalf("failed to read object file: %v", err)
 				}
@@ -97,7 +97,7 @@ func TestIssue38068(t *testing.T) {
 	}
 
 	readBytes := func(fn string) []byte {
-		payload, err := ioutil.ReadFile(fn)
+		payload, err := os.ReadFile(fn)
 		if err != nil {
 			t.Fatalf("failed to read executable '%s': %v", fn, err)
 		}

@@ -27,7 +27,7 @@ func run(stdin []byte, argv []string) (stdout, stderr []byte, ok bool) {
 		}
 		name := f.Name()
 		f.Close()
-		if err := ioutil.WriteFile(name+".c", stdin, 0666); err != nil {
+		if err := os.WriteFile(name+".c", stdin, 0666); err != nil {
 			os.Remove(name)
 			fatalf("%s", err)
 		}

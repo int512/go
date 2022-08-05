@@ -1,4 +1,6 @@
+//go:build !nacl && !js && !android && !gccgo
 // +build !nacl,!js,!android,!gccgo
+
 // run
 
 // Copyright 2016 The Go Authors. All rights reserved.
@@ -59,7 +61,7 @@ func main() {
 	}
 	defer os.RemoveAll(dir)
 	path := filepath.Join(dir, "ridiculous_number_of_fields.go")
-	if err := ioutil.WriteFile(path, buf.Bytes(), 0664); err != nil {
+	if err := os.WriteFile(path, buf.Bytes(), 0664); err != nil {
 		log.Fatal(err)
 	}
 

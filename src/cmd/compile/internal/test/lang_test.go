@@ -31,7 +31,7 @@ func TestInvalidLang(t *testing.T) {
 	defer os.RemoveAll(dir)
 
 	src := filepath.Join(dir, "alias.go")
-	if err := ioutil.WriteFile(src, []byte(aliasSrc), 0644); err != nil {
+	if err := os.WriteFile(src, []byte(aliasSrc), 0644); err != nil {
 		t.Fatal(err)
 	}
 

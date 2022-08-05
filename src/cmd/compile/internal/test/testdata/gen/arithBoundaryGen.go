@@ -14,8 +14,8 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
-	"io/ioutil"
 	"log"
+	"os"
 	"text/template"
 )
 
@@ -202,7 +202,7 @@ func main() {
 	}
 
 	// write to file
-	err = ioutil.WriteFile("../arithBoundary_test.go", src, 0666)
+	err = os.WriteFile("../arithBoundary_test.go", src, 0666)
 	if err != nil {
 		log.Fatalf("can't write output: %v\n", err)
 	}

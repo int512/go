@@ -87,7 +87,7 @@ func main() {
 	defer os.RemoveAll(dir)
 
 	file := filepath.Join(dir, "main.go")
-	if err := ioutil.WriteFile(file, []byte(prog), 0655); err != nil {
+	if err := os.WriteFile(file, []byte(prog), 0655); err != nil {
 		log.Fatalf("Write error %v", err)
 	}
 

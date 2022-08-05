@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"go/format"
 	"go/types"
-	"io/ioutil"
 	"log"
 	"reflect"
 	"sort"
@@ -97,7 +96,7 @@ func main() {
 		out = buf.Bytes()
 	}
 
-	err = ioutil.WriteFile("node_gen.go", out, 0666)
+	err = os.WriteFile("node_gen.go", out, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}

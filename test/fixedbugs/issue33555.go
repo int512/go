@@ -1,4 +1,6 @@
+//go:build !nacl && !js && !gccgo
 // +build !nacl,!js,!gccgo
+
 // run
 
 // Copyright 2019 The Go Authors. All rights reserved.
@@ -52,7 +54,7 @@ func test() error {
 	var buf bytes.Buffer
 	buf.WriteString(start)
 	for i := 0; i < count; i++ {
-		fmt.Fprintf(&buf, fn, i, i + 1)
+		fmt.Fprintf(&buf, fn, i, i+1)
 	}
 	fmt.Fprintf(&buf, fnlast, count)
 
@@ -63,7 +65,7 @@ func test() error {
 	defer os.RemoveAll(dir)
 
 	fn := filepath.Join(dir, "x.go")
-	if err := ioutil.WriteFile(fn, buf.Bytes(), 0644); err != nil {
+	if err := os.WriteFile(fn, buf.Bytes(), 0644); err != nil {
 		return err
 	}
 

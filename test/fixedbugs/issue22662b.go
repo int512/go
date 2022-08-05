@@ -1,4 +1,6 @@
+//go:build !js && gc
 // +build !js,gc
+
 // run
 
 // Copyright 2018 The Go Authors. All rights reserved.
@@ -44,7 +46,7 @@ func main() {
 	defer os.Remove(f.Name())
 
 	for _, test := range tests {
-		if err := ioutil.WriteFile(f.Name(), []byte(test.src), 0660); err != nil {
+		if err := os.WriteFile(f.Name(), []byte(test.src), 0660); err != nil {
 			log.Fatal(err)
 		}
 

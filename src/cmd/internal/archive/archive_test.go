@@ -132,7 +132,7 @@ func buildGoobj(t *testing.T) goobjPaths {
 				gopath := filepath.Join(buildDir, "gopath")
 				err = copyDir(filepath.Join(gopath, "src", "mycgo"), filepath.Join("testdata", "mycgo"))
 				if err == nil {
-					err = ioutil.WriteFile(filepath.Join(gopath, "src", "mycgo", "go.mod"), []byte("module mycgo\n"), 0666)
+					err = os.WriteFile(filepath.Join(gopath, "src", "mycgo", "go.mod"), []byte("module mycgo\n"), 0666)
 				}
 				if err != nil {
 					return err

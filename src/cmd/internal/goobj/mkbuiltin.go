@@ -44,7 +44,7 @@ func main() {
 	if *stdout {
 		_, err = os.Stdout.Write(out)
 	} else {
-		err = ioutil.WriteFile("builtinlist.go", out, 0666)
+		err = os.WriteFile("builtinlist.go", out, 0666)
 	}
 	if err != nil {
 		log.Fatal(err)

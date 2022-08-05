@@ -63,7 +63,7 @@ func TestInst(t *testing.T) {
 	if output, err = cmd.CombinedOutput(); err != nil {
 		t.Fatalf("Failed: %v:\nOut: %s\n", err, output)
 	}
-	out, err := ioutil.ReadFile(filepath.Join("testdata", outname))
+	out, err := os.ReadFile(filepath.Join("testdata", outname))
 	if err != nil {
 		t.Fatalf("Could not find %s\n", outname)
 	}

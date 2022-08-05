@@ -42,7 +42,7 @@ func runGenTest(t *testing.T, filename, tmpname string, ev ...string) {
 	defer os.RemoveAll(tmpdir)
 
 	rungo := filepath.Join(tmpdir, "run.go")
-	ok = ioutil.WriteFile(rungo, stdout.Bytes(), 0600)
+	ok = os.WriteFile(rungo, stdout.Bytes(), 0600)
 	if ok != nil {
 		t.Fatalf("Failed to create temporary file " + rungo)
 	}
@@ -102,7 +102,7 @@ func TestCode(t *testing.T) {
 		if !strings.HasSuffix(f.Name(), "_test.go") {
 			continue
 		}
-		text, err := ioutil.ReadFile(filepath.Join("testdata", f.Name()))
+		text, err := os.ReadFile(filepath.Join("testdata", f.Name()))
 		if err != nil {
 			t.Fatalf("can't read testdata/%s: %v", f.Name(), err)
 		}

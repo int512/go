@@ -1574,7 +1574,7 @@ func (t *tester) packageHasBenchmarks(pkg string) bool {
 		if !strings.HasSuffix(name, "_test.go") {
 			continue
 		}
-		slurp, err := ioutil.ReadFile(filepath.Join(pkgDir, name))
+		slurp, err := os.ReadFile(filepath.Join(pkgDir, name))
 		if err != nil {
 			return true // conservatively
 		}

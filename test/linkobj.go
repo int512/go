@@ -1,4 +1,6 @@
+//go:build !nacl && !js && gc
 // +build !nacl,!js,gc
+
 // run
 
 // Copyright 2016 The Go Authors. All rights reserved.
@@ -122,18 +124,18 @@ func runFail(args ...string) string {
 }
 
 func cp(src, dst string) {
-	data, err := ioutil.ReadFile(src)
+	data, err := os.ReadFile(src)
 	if err != nil {
 		fatalf("%v", err)
 	}
-	err = ioutil.WriteFile(dst, data, 0666)
+	err = os.WriteFile(dst, data, 0666)
 	if err != nil {
 		fatalf("%v", err)
 	}
 }
 
 func writeFile(name, data string) {
-	err := ioutil.WriteFile(name, []byte(data), 0666)
+	err := os.WriteFile(name, []byte(data), 0666)
 	if err != nil {
 		fatalf("%v", err)
 	}

@@ -38,7 +38,7 @@ func TestLarge(t *testing.T) {
 	gen(buf)
 
 	tmpfile := filepath.Join(dir, "x.s")
-	err = ioutil.WriteFile(tmpfile, buf.Bytes(), 0644)
+	err = os.WriteFile(tmpfile, buf.Bytes(), 0644)
 	if err != nil {
 		t.Fatalf("can't write output: %v\n", err)
 	}
@@ -92,7 +92,7 @@ func TestNoRet(t *testing.T) {
 	}
 	defer os.RemoveAll(dir)
 	tmpfile := filepath.Join(dir, "x.s")
-	if err := ioutil.WriteFile(tmpfile, []byte("TEXT ·stub(SB),$0-0\nNOP\n"), 0644); err != nil {
+	if err := os.WriteFile(tmpfile, []byte("TEXT ·stub(SB),$0-0\nNOP\n"), 0644); err != nil {
 		t.Fatal(err)
 	}
 	cmd := exec.Command(testenv.GoToolPath(t), "tool", "asm", "-o", filepath.Join(dir, "x.o"), tmpfile)
@@ -130,7 +130,7 @@ func TestPCALIGN(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		if err := ioutil.WriteFile(tmpfile, test.code, 0644); err != nil {
+		if err := os.WriteFile(tmpfile, test.code, 0644); err != nil {
 			t.Fatal(err)
 		}
 		cmd := exec.Command(testenv.GoToolPath(t), "tool", "asm", "-S", "-o", tmpout, tmpfile)

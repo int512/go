@@ -500,7 +500,7 @@ func genOp() {
 		panic(err)
 	}
 
-	if err := ioutil.WriteFile("../opGen.go", b, 0666); err != nil {
+	if err := os.WriteFile("../opGen.go", b, 0666); err != nil {
 		log.Fatalf("can't write output: %v\n", err)
 	}
 
@@ -521,7 +521,7 @@ func genOp() {
 			log.Fatalf("bad opcode regexp %s: %v", pattern, err)
 		}
 
-		src, err := ioutil.ReadFile(a.genfile)
+		src, err := os.ReadFile(a.genfile)
 		if err != nil {
 			log.Fatalf("can't read %s: %v", a.genfile, err)
 		}

@@ -1,4 +1,6 @@
+//go:build !nacl && !js && gc
 // +build !nacl,!js,gc
+
 // run
 
 // Copyright 2015 The Go Authors. All rights reserved.
@@ -48,7 +50,7 @@ func x() {
 }
 `)
 
-	if err := ioutil.WriteFile(filepath.Join(dir, "x.go"), buf.Bytes(), 0666); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "x.go"), buf.Bytes(), 0666); err != nil {
 		log.Fatal(err)
 	}
 

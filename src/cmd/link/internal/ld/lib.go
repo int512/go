@@ -1237,7 +1237,7 @@ func writeGDBLinkerScript() string {
 }
 INSERT AFTER .debug_types;
 `
-	err := ioutil.WriteFile(path, []byte(src), 0666)
+	err := os.WriteFile(path, []byte(src), 0666)
 	if err != nil {
 		Errorf(nil, "WriteFile %s failed: %v", name, err)
 	}
@@ -1842,7 +1842,7 @@ var createTrivialCOnce sync.Once
 func linkerFlagSupported(arch *sys.Arch, linker, altLinker, flag string) bool {
 	createTrivialCOnce.Do(func() {
 		src := filepath.Join(*flagTmpdir, "trivial.c")
-		if err := ioutil.WriteFile(src, []byte("int main() { return 0; }"), 0666); err != nil {
+		if err := os.WriteFile(src, []byte("int main() { return 0; }"), 0666); err != nil {
 			Errorf(nil, "WriteFile trivial.c failed: %v", err)
 		}
 	})

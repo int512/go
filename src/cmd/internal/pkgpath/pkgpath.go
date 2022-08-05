@@ -40,7 +40,7 @@ func ToSymbolFunc(cmd, tmpdir string) (func(string) string, error) {
 	f.Close()
 	defer os.Remove(gofilename)
 
-	if err := ioutil.WriteFile(gofilename, []byte(mangleCheckCode), 0644); err != nil {
+	if err := os.WriteFile(gofilename, []byte(mangleCheckCode), 0644); err != nil {
 		return nil, err
 	}
 

@@ -1,4 +1,6 @@
+//go:build !js && gc
 // +build !js,gc
+
 // run
 
 // Copyright 2017 The Go Authors. All rights reserved.
@@ -31,7 +33,7 @@ func main() {
 	var src bytes.Buffer
 	fmt.Fprintf(&src, "//line %s:1\n", filepath.Join(path, "foo.go"))
 
-	if err := ioutil.WriteFile(f.Name(), src.Bytes(), 0660); err != nil {
+	if err := os.WriteFile(f.Name(), src.Bytes(), 0660); err != nil {
 		log.Fatal(err)
 	}
 

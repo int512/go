@@ -1,4 +1,6 @@
+//go:build !nacl && !js
 // +build !nacl,!js
+
 // run
 
 // Copyright 2018 The Go Authors. All rights reserved.
@@ -71,7 +73,7 @@ bar            :
 
 	for i, test := range tests {
 		filename := filepath.Join(tmpdir, fmt.Sprintf("%d.go", i))
-		if err := ioutil.WriteFile(filename, []byte(test.code), 0644); err != nil {
+		if err := os.WriteFile(filename, []byte(test.code), 0644); err != nil {
 			log.Printf("#%d: failed to create file %s", i, filename)
 			continue
 		}

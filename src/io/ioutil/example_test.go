@@ -6,6 +6,7 @@ package ioutil_test
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
@@ -16,7 +17,7 @@ import (
 func ExampleReadAll() {
 	r := strings.NewReader("Go is a general-purpose language designed with systems programming in mind.")
 
-	b, err := ioutil.ReadAll(r)
+	b, err := io.ReadAll(r)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,7 +49,7 @@ func ExampleTempDir() {
 	defer os.RemoveAll(dir) // clean up
 
 	tmpfn := filepath.Join(dir, "tmpfile")
-	if err := ioutil.WriteFile(tmpfn, content, 0666); err != nil {
+	if err := os.WriteFile(tmpfn, content, 0666); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -112,7 +113,7 @@ func ExampleTempFile_suffix() {
 }
 
 func ExampleReadFile() {
-	content, err := ioutil.ReadFile("testdata/hello")
+	content, err := os.ReadFile("testdata/hello")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -125,7 +126,7 @@ func ExampleReadFile() {
 
 func ExampleWriteFile() {
 	message := []byte("Hello, Gophers!")
-	err := ioutil.WriteFile("hello", message, 0644)
+	err := os.WriteFile("hello", message, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}

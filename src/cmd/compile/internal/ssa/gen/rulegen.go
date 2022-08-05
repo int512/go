@@ -280,7 +280,7 @@ func genRulesSuffix(arch arch, suff string) {
 	file, err := parser.ParseFile(fset, "", buf, parser.ParseComments)
 	if err != nil {
 		filename := fmt.Sprintf("%s_broken.go", arch.name)
-		if err := ioutil.WriteFile(filename, buf.Bytes(), 0644); err != nil {
+		if err := os.WriteFile(filename, buf.Bytes(), 0644); err != nil {
 			log.Printf("failed to dump broken code to %s: %v", filename, err)
 		} else {
 			log.Printf("dumped broken code to %s", filename)

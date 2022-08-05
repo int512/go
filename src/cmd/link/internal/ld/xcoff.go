@@ -11,8 +11,8 @@ import (
 	"cmd/link/internal/sym"
 	"encoding/binary"
 	"fmt"
-	"io/ioutil"
 	"math/bits"
+	"os"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -1805,7 +1805,7 @@ func xcoffCreateExportFile(ctxt *Link) (fname string) {
 		buf.Write([]byte(name + "\n"))
 	}
 
-	err := ioutil.WriteFile(fname, buf.Bytes(), 0666)
+	err := os.WriteFile(fname, buf.Bytes(), 0666)
 	if err != nil {
 		Errorf(nil, "WriteFile %s failed: %v", fname, err)
 	}

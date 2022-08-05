@@ -64,7 +64,7 @@ func writeSettings(fname string, settings *settings) error {
 		return fmt.Errorf("failed to create settings directory: %w", err)
 	}
 
-	if err := ioutil.WriteFile(fname, data, 0644); err != nil {
+	if err := os.WriteFile(fname, data, 0644); err != nil {
 		return fmt.Errorf("failed to write settings: %w", err)
 	}
 	return nil

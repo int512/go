@@ -12,7 +12,6 @@ import (
 	"go/build"
 	"internal/pkgbits"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -149,7 +148,7 @@ func Import(packages map[string]*types2.Package, path, srcDir string, lookup fun
 		if size >= 0 {
 			r = io.LimitReader(r, int64(size))
 		}
-		data, err = ioutil.ReadAll(r)
+		data, err = io.ReadAll(r)
 		if err != nil {
 			break
 		}

@@ -67,7 +67,7 @@ func TestIssue16214(t *testing.T) {
 	defer os.RemoveAll(dir)
 
 	src := filepath.Join(dir, "x.go")
-	err = ioutil.WriteFile(src, []byte(issue16214src), 0644)
+	err = os.WriteFile(src, []byte(issue16214src), 0644)
 	if err != nil {
 		t.Fatalf("could not write file: %v", err)
 	}
